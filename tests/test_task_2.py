@@ -1,10 +1,14 @@
-from task_2 import  go_to_images
 
 
-def test_image(test):
-    driver.switch_to.window(driver.window_handles[1])
-    if test == driver.current_window_handle:
-        print(f'Окна совпадают: {driver.current_window_handle}')
-        time.sleep(300)
-    else:
-        print('Окна не  совпадают')
+
+def test_menu_button():
+    pass
+
+def test_url():
+    pass
+
+def test_image_open():
+    pass
+
+def test_return():
+    pass
