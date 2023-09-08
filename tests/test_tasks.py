@@ -1,10 +1,7 @@
-import pytest
+import  pytest
+from pages.base_page import data
 
-from  main import run
 
-
-def test_menu_all():
-    assert menu_all == True,'Меню (Все) не найдено!'
 
 
 

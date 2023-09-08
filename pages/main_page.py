@@ -12,46 +12,60 @@ class MainPage(BasePage):
     BUTTON_NEXT = (By.XPATH, '//div[contains(@class,"CircleButton_type_next")]')
     BUTTON_PREV = (By.XPATH, '//div[contains(@class,"CircleButton_type_prev")]')
     LINK_LIST = (By.CSS_SELECTOR, ".organic__url-text")
-    search_object = 'Тензор'
+    KEY = 'Тензор'
+    #URL = 'https://ya.ru/'
+
+    def step_1(self):
+        meaning =  self.find_keys()
+        return meaning
+
 
     def first_image(self):
-        """Для контроля логики  нового окна."""
+        """Для контроля логики нового окна."""
         self.find_window(1)
-        self.click_through_elements(*self.FIRST_CATEGORY)
-        self.click_through_elements(*self.FIRST_IMAGE)
+        self.click_element(*self.FIRST_CATEGORY)
+        self.click_element(*self.FIRST_IMAGE)
         self.click_element(*self.BUTTON_NEXT)
         self.click_element(*self.BUTTON_PREV)
 
+    def open_image(self):
+        '''Открывает картинки'''
+        self.activate_search_string()
+        self.move_to_element_and_click(*self.MENU_ALL)
+        self.click_element(*self.IMAGES_OPTION)
+        self.first_image()
 
 
     def activate_search_string (self):
         '''
         Активирует поисковую строку.
-        :return:
         '''
         self.click_element(*self.SEARCH_STRING)
 
-    def run_picture_script(self):
-        """
-        Запускает скрипт
-        :return:
-        """
-        self.activate_search_string()
-        self.move_to_element_and_click(*self.MENU_ALL)
-        self.click_element(*self.IMAGES_OPTION)
-        self.first_image()
-        self.find_window()
-
-        #self.activate_search_string()
-
-        #self.send_keys()
-
-
     def get_link_list(self):
-        return self.find_element(*self,__LINK_LIST)
+        return self.find_elements(*self.LINK_LIST)
 
-    def send_keys(self):
-        return send_keys(self.search_object)
+
+    def find_keys(self):
+        element = self.find_element(*self.SEARCH_STRING)
+        check = element.is_displayed()
+        element.send_keys(self.KEY)
+        element.submit()
+        time.sleep(1)
+        return check
+
+
+
+    def run_script(self):
+        """Запускает скрипт"""
+        self.open_image()
+
+
+
+
+
+
+
 
 
 
